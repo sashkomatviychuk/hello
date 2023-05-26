@@ -10,4 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Result
-        run: echo "Completed"
+        run: echo "Completed job 1"
+
+  production_integration_tests_2:
+    name: Production integration tests 2
+    runs-on: ubuntu-latest
+    steps:
+      - name: Result
+        run: echo "Completed job 2"
