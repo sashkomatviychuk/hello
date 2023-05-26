@@ -1,0 +1,20 @@
+name: Run tests every hour at 0 mins
+
+on:
+  schedule:
+    - cron: '0 * * * *'
+
+jobs:
+  production_integration_tests_1:
+    name: Production integration tests 1
+    runs-on: ubuntu-latest
+    steps:
+      - name: Result
+        run: echo "Completed job 1"
+
+  production_integration_tests_2:
+    name: Production integration tests 2
+    runs-on: ubuntu-latest
+    steps:
+      - name: Result
+        run: echo "Completed job 2"
