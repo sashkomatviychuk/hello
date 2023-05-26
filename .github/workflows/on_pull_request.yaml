@@ -7,6 +7,7 @@ on:
 jobs:
   production_integration_tests_1:
     name: Production integration tests 1
+    if: ${{ env.TEST_VAR == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Result
@@ -14,7 +15,7 @@ jobs:
 
   production_integration_tests_2:
     name: Production integration tests 2
-    needs: [production_integration_tests_1]
+    if: ${{ env.TEST_VAR == 'false' }}
     runs-on: ubuntu-latest
     steps:
       - name: Result
