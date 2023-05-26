@@ -1,0 +1,13 @@
+name: Schedule Integration Tests Job
+
+on:
+  schedule:
+    - cron: '*/3 * * * *'
+
+jobs:
+  production_integration_tests_1:
+    name: Production integration tests 1
+    runs-on: ubuntu-latest
+    steps:
+      - name: Result
+        run: echo "Completed"
