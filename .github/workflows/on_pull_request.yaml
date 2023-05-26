@@ -11,3 +11,11 @@ jobs:
     steps:
       - name: Result
         run: echo "Completed"
+
+  production_integration_tests_2:
+    name: Production integration tests 2
+    needs: [production_integration_tests_1]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Result
+        run: echo "Runned after tests_1"
