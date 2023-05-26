@@ -10,6 +10,8 @@ jobs:
     if: ${{ vars.TEST_VAR == 'true' }}
     runs-on: ubuntu-latest
     steps:
+      - name: Set new value for TEST_VAR
+        run: echo "TEST_VAR=false" >> $GITHUB_ENV
       - name: Result
         run: echo "Completed"
 
