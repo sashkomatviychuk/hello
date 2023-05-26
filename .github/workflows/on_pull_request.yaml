@@ -2,7 +2,7 @@ name: Run on pull request
 
 on:
   pull_request:
-    types: [opened, labeled, unlabeled, synchronize, reopened]
+    types: [opened, synchronize, reopened]
 
 jobs:
   production_integration_tests_1:
