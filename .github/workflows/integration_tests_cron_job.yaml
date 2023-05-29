@@ -5,16 +5,64 @@ on:
     - cron: '*/3 * * * *'
 
 jobs:
-  production_integration_tests_1:
-    name: Production integration tests 1
+  setup:
+    name: Setup
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Archive
+        run: tar -czf release.tar.gz node_modules/
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: release.tar.gz
+          retention-days: 1
+          if-no-files-found: error
+
+  production_integration_tests_1:
+    name: Production integration tests 1
+    needs: [setup]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+
+      - uses: actions/download-artifact@v3
+        with:
+          name: build
+
+      - name: Unarchive
+        shell: bash
+        run: |
+          tar -xzf release.tar.gz
+          rm release.tar.gz
+
+      - name: Run tests
+        run: npm test
+
       - name: Result
-        run: echo "Completed job 1"
+        run: echo "Completed"
 
   production_integration_tests_2:
     name: Production integration tests 2
+    needs: [setup]
     runs-on: ubuntu-latest
     steps:
       - name: Result
-        run: echo "Completed job 2"
+        run: echo "Runned after tests_1"
