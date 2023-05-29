@@ -16,16 +16,16 @@ jobs:
 
     - name: Install dependencies
       run: npm install
-    
+
     - name: Archive
       run: tar -czf release.tar.gz node_modules/
-    
+
     - uses: actions/upload-artifact@v3
-        with:
-          name: build
-          path: release.tar.gz
-          retention-days: 1
-          if-no-files-found: error
+      with:
+        name: build
+        path: release.tar.gz
+        retention-days: 1
+        if-no-files-found: error
 
   production_integration_tests_1:
     name: Production integration tests 1
@@ -43,12 +43,12 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: build
-      
+
       - name: Unarchive
         shell: bash
         run: |
           tar -xzf release.tar.gz
-          rm release.tar.gz 
+          rm release.tar.gz
 
       - name: Run tests
         run: npm test
@@ -62,4 +62,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Result
-        run: echo "Runned after tests_1" 
+        run: echo "Runned after tests_1"
