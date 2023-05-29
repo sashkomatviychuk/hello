@@ -6,26 +6,29 @@ on:
 
 jobs:
   setup:
-    - name: Checkout code
-      uses: actions/checkout@v2
+    name: Setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: 16
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Archive
-      run: tar -czf release.tar.gz node_modules/
+      - name: Archive
+        run: tar -czf release.tar.gz node_modules/
 
-    - uses: actions/upload-artifact@v3
-      with:
-        name: build
-        path: release.tar.gz
-        retention-days: 1
-        if-no-files-found: error
+      - uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: release.tar.gz
+          retention-days: 1
+          if-no-files-found: error
 
   production_integration_tests_1:
     name: Production integration tests 1
