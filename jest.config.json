@@ -1,0 +1,5 @@
+{
+  "roots": ["./"],
+  "testMatch": ["**/tests/*.spec.js"],
+  "testEnvironment": "node"
+}
