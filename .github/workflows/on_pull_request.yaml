@@ -7,17 +7,27 @@ on:
 jobs:
   production_integration_tests_1:
     name: Production integration tests 1
-    if: ${{ vars.TEST_VAR == 'true' }}
     runs-on: ubuntu-latest
     steps:
-      - name: Set new value for TEST_VAR
-        run: echo "TEST_VAR=false" >> $GITHUB_ENV
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Run tests
+        run: npm test
+
       - name: Result
         run: echo "Completed"
 
   production_integration_tests_2:
     name: Production integration tests 2
-    if: ${{ vars.TEST_VAR == 'false' }}
     runs-on: ubuntu-latest
     steps:
       - name: Result
